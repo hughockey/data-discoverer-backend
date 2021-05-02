@@ -1,0 +1,30 @@
+version: '3'
+services:
+    mongo:
+        container_name: mongo
+        image: mongo
+        restart: always
+        environment:
+            MONGO_INITDB_ROOT_USERNAME: root
+            MONGO_INITDB_ROOT_PASSWORD: root
+            MONGO_INITDB_DATABASE: admin
+        networks:
+            - app-tier
+        volumes:
+            - ./mongo:/docker-entrypoint-initdb.d
+
+    flask:
+        container_name: flask
+        build:
+            context: .
+            dockerfile: Dockerfile
+        depends_on:
+            - mongo
+        networks:
+            - app-tier
+        command:
+            tail -f /dev/null
+
+networks:
+    app-tier:
+        driver: bridge
