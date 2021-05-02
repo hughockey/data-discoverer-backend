@@ -12,6 +12,24 @@ services:
             - app-tier
         volumes:
             - ./mongo:/docker-entrypoint-initdb.d
+    
+    mongo-express:
+        image: mongo-express
+        container_name: mongo-express
+        environment:
+            ME_CONFIG_MONGODB_SERVER: mongo
+            ME_CONFIG_MONGODB_ADMINUSERNAME: root
+            ME_CONFIG_MONGODB_ADMINPASSWORD: root
+            ME_CONFIG_BASICAUTH_USERNAME: admin
+            ME_CONFIG_BASICAUTH_PASSWORD: admin
+        depends_on:
+            - mongo
+        networks:
+            - app-tier
+        ports:
+            - 8081:8081
+        volumes:
+            - ./.docker/mongo-express/docker-entrypoint.sh:/docker-entrypoint.sh
 
     flask:
         container_name: flask
