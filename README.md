@@ -12,7 +12,7 @@
 8. Voila, the project should now be up and running, if you open a new terminal in VSCode it will be running inside of the flask container with all the project dependencies setup correctly. This container also hass access to the mongodb container through the following connection string `mongodb://root:root@mongo:27017/`
 
 # Accessing mongo-express to interact with the mongo database through a GUI
-1. Make sure you have completed all of the steps under [Getting started with Docker and VSCode for development](#Getting started with Docker and VSCode for development) and you have the project running in your editor currently
+1. Make sure you have completed all of the steps under [Getting started with Docker and VSCode for development](#getting-started-with-docker-and-vscode-for-development) and you have the project running in your editor currently
 2. Navigate to `http://localhost:8081/`
 3. Login with the credentials: `admin:admin`
 4. You should see a screen which looks like this:
