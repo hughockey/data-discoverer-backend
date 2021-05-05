@@ -3,7 +3,7 @@
 2. Open the project folder in VSCode and click the green button in the bottom left: ![Green button in bottom left corner of VSCode screenshot](screenshots/open-folder-in-vscode-arrow.png)
 3. Click "Remote-Containers: Open Folder in Container..." in the menu that opens:
 ![Remote-Containers: Open Folder in Container... screenshot](screenshots/open-folder-in-container.png)
-4. Open the project folder in the explorer window that opens, vscode will open this folder inside of the docker container
+4. Select the project folder in the explorer window that opens, vscode will open this folder inside of the docker container
 5. Click "From 'docker-compose.yml' in the menu that opens:
 ![From 'docker-compose.yml' menu screenshot](screenshots/open-from-docker-compose.png)
 6. VSCode will ask which container will be used for development, you should choose the flask container since we will primarily be doing python/flask development for the back-end:
@@ -11,6 +11,10 @@
 7. Wait while Docker works its magic downloading and building all of the images(You won't have ot wait so long every time you open the project, just this first time, docker caches everything)
 8. Voila, the project should now be up and running, if you open a new terminal in VSCode it will be running inside of the flask container with all the project dependencies setup correctly. This container also has access to the mongodb container through the following connection string `mongodb://root:root@mongo:27017/`
 
+# How to start the project for development once it has been setup
+1. Make sure you have already followed these steps: [Getting started with Docker and VSCode for development](#getting-started-with-docker-and-vscode-for-development)
+2. Open the folder in VSCode. Depending on how you open it VSCode may find your previous configuration and start the project in docker automatically. If this is the case you'll see something like this in the lower left hand corner: ![Already open in docker screenshot](screenshots/already-open-in-docker.png)
+3. If the project isn't already open in docker, click the green button in the bottom left corner of VSCode like you did during the setup steps and select "Remote-Containers: Reopen in Container"
 
 # Accessing mongo-express to interact with the mongo database through a GUI
 1. Make sure you have completed all of the steps under [Getting started with Docker and VSCode for development](#getting-started-with-docker-and-vscode-for-development) and you have the project running in your editor currently
