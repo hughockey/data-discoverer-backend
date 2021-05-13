@@ -11,11 +11,17 @@ def get_package_list(ckan_url):
     return package_list
 
 def get_metadata_record(ckan_url, dataset_id):
-    pass
+    metadata_record_url = urljoin(ckan_url, 'api/3/action/package_show?id='+dataset_id)
+    response = requests.get(metadata_record_url)
+    response.raise_for_status()
+
+    record = json.loads(response.content)
+    return record
 
 def main():
     ioos_url = 'https://data.ioos.us/'
     get_package_list(ioos_url)
+    get_metadata_record(ioos_url, '006-santa-cruz-harbor-ca')
 
 
 if __name__ == '__main__':
