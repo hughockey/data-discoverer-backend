@@ -43,6 +43,17 @@ services:
         command:
             tail -f /dev/null
 
+    solr:
+        container_name: solr
+        image: solr:8
+        ports:
+            - "8983:8983"
+        volumes:
+            - ./.docker/solr/docker-entrypoint.sh
+        command:
+            - solr-precreate
+            - gettingstarted
+
 networks:
     app-tier:
         driver: bridge
