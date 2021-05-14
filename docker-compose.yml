@@ -48,6 +48,8 @@ services:
         image: solr:8
         ports:
             - "8983:8983"
+        networks:
+            - app-tier
         volumes:
             - ./.docker/solr/docker-entrypoint.sh
         command:
