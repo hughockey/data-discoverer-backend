@@ -48,10 +48,12 @@ services:
         image: solr:8
         ports:
             - "8983:8983"
+        depends_on:
+            - mongo
         networks:
             - app-tier
         volumes:
-            - ./.docker/solr/docker-entrypoint.sh
+            - /var/solr
         command:
             - solr-precreate
             - gettingstarted
