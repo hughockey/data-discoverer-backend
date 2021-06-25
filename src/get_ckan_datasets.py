@@ -1,6 +1,6 @@
 import json
 import requests
-import pymongo
+from pymongo import ReplaceOne
 import constants
 from requests.compat import urljoin
 
@@ -20,16 +20,22 @@ def get_metadata_record(ckan_url, dataset_id):
     record = json.loads(response.content)
     return record
 
-def add_to_mongo(record):
-    constants.mycol.insert_one(record)
+def add_operations_in_array(record, operations):
+    # array of operations necessary for bulk insert
+    operations.append(
+        ReplaceOne({'id' : record['id']}, record, upsert=True)
+    )
     
 
 def main():
     ioos_url = 'https://data.ioos.us/'
     package_list = get_package_list(ioos_url)
+    operations = []
     for metadata_record in package_list['result']:
         record = get_metadata_record(ioos_url, metadata_record)
-        add_to_mongo(record['result'])
+        add_operations_in_array(record['result'], operations)
+
+    constants.mycol_raw.bulk_write(operations)
 
 
 if __name__ == '__main__':
