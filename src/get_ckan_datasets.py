@@ -5,7 +5,14 @@ import constants
 from requests.compat import urljoin
 
 def get_package_list(ckan_url):
-    package_list_url = urljoin(ckan_url, 'api/3/action/package_list')
+    """Fetch the package list from a CKAN instance
+
+    Args:
+        ckan_url (String): The base URL for the target CKAN
+
+    Returns:
+        dict: A dictionary containing the result as a list of package_id strings contained in the "result" key
+    """    package_list_url = urljoin(ckan_url, 'api/3/action/package_list')
     response = requests.get(package_list_url)
     response.raise_for_status()
 
