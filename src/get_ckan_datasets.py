@@ -12,7 +12,8 @@ def get_package_list(ckan_url):
 
     Returns:
         dict: A dictionary containing the result as a list of package_id strings contained in the "result" key
-    """    package_list_url = urljoin(ckan_url, 'api/3/action/package_list')
+    """    
+    package_list_url = urljoin(ckan_url, 'api/3/action/package_list')
     response = requests.get(package_list_url)
     response.raise_for_status()
 
@@ -20,6 +21,15 @@ def get_package_list(ckan_url):
     return package_list
 
 def get_metadata_record(ckan_url, dataset_id):
+    """Get single metadata record from a dataset ID
+
+    Args:
+        ckan_url (String): The base URL for the target CKAN
+        dataset_id (String): Dataset ID
+
+    Returns:
+        object: JSON object containing all informations about a single metadata
+    """
     metadata_record_url = urljoin(ckan_url, 'api/3/action/package_show?id='+dataset_id)
     response = requests.get(metadata_record_url)
     response.raise_for_status()
@@ -28,6 +38,12 @@ def get_metadata_record(ckan_url, dataset_id):
     return record
 
 def add_operations_in_array(record, operations):
+    """Build an array of operations necessary to do a bulk insert to the database
+
+    Args:
+        record (array): Single metadata record
+        operations (array): Empty array to fill
+    """
     # array of operations necessary for bulk insert
     operations.append(
         ReplaceOne({'id' : record['id']}, record, upsert=True)
